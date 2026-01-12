@@ -1,0 +1,31 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.file-input-window {
+  min-height: 300px;
+  font-size: 50px;
+  text-align: center;
+  background-color: white;
+  border: 5px solid black;
+  margin: 10% 1% 1% 1%;
+}
+
+.pokemon-info-window {
+  height: 30%;
+  min-width: 400px;
+  font-size: 50px;
+  text-align: center;
+  background-color: white;
+  border: 5px solid black;
+  margin: 10% 1% 1% 1%;
+}

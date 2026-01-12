@@ -1,0 +1,26 @@
+.pokemon-list {
+  width: max(100%, 100px);
+  max-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.scrollable-list::-webkit-scrollbar {
+  width: 8px; /* Thin scrollbar */
+}
+
+.scrollable-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.scrollable-list::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.pokemon-list-element {
+  display: flex;
+  align-items: center;
+  border: 2px solid #000000;
+  cursor: pointer;
+}
