@@ -32,7 +32,7 @@ function isFavValid(fav: number, details: Detail[]) {
 const PokemonListItem = ({detail, onPokemonClick, favorite}: {detail: Detail, onPokemonClick: (pokemon: Detail) => void, favorite?: boolean}) => (
   <div onClick={() => {
       onPokemonClick(detail);
-    }} className="pokemon-list-element">
+    }} className={`pokemon-list-element ${favorite ? "favorite" : ""}`}>
       <h3>{detail.name} - {detail.id} - {favorite ? "⭐" : ""}</h3>
       <img src={detail.sprite} alt={detail.name}/>
   </div>

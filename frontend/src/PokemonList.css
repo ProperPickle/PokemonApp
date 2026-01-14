@@ -26,11 +26,5 @@
 }
 
 .pokemon-list-element.favorite {
-  display: flex;
-  align-items: center;
-  border: 2px solid #000000;
-  cursor: pointer;
-  background: linear-gradient(135deg, #ffd700, #ffed4e);
-  border: 2px solid gold;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #720eb5, #ffbe19);
 }
