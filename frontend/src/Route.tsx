@@ -13,7 +13,7 @@ const RouteOnMap = ({ origin : {lat: originLat, lng: originLng}, destination, on
   const map = useMap();
   const [polyline, setPolyline] = useState<google.maps.Polyline | null>(null);
   const lastCallTimeRef = useRef<number>(0);
-  const COOLDOWN_MS = 3000; // 1 second cooldown
+  const COOLDOWN_MS = 3000; // 3 second cooldown
 
   const originPos = useMemo(() => 
     originLat != null && !(originLat === 0 && originLng === 0) ? new google.maps.LatLng(originLat, originLng) : null,

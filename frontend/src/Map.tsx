@@ -41,11 +41,11 @@ const MapComponent = ({onPokemonClick, onDistanceCalculated, currPokemon, routeO
   }, []);
 
   return (
-    <APIProvider apiKey={"AIzaSyCFghxyiLGiZtHDqwOkvPTDofhzCfjQZnk"} libraries={["geometry"]} onLoad={() => console.log('Maps API has loaded.')}>
+    <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY} libraries={["geometry"]} onLoad={() => console.log('Maps API has loaded.')}>
       <Map
         className="map-container"
         defaultZoom={15}
-        mapId = '54e47c1d45fafe2b34ed4fcb'
+        mapId = {import.meta.env.VITE_MAPS_ID}
         defaultCenter={{lat: 34.0699, lng: -118.4438}}
         onCameraChanged={ (ev: MapCameraChangedEvent) =>
           console.log('camera changed:', ev.detail.center, 'zoom:', ev.detail.zoom)
