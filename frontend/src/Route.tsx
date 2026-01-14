@@ -1,29 +1,47 @@
 /* global google */
 /// <reference types="google.maps" />
 import { useMap } from "@vis.gl/react-google-maps";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useRef} from "react";
 
 interface RouteProps {
-  origin: { lat: number; lng: number } | null;
+  origin: { lat: number; lng: number };
   destination: { lat: number; lng: number };
   onDistanceCalculated?: (distanceKm: number) => void;
 }
 
-const RouteOnMap = ({ origin, destination, onDistanceCalculated }: RouteProps) => {
+const RouteOnMap = ({ origin : {lat: originLat, lng: originLng}, destination, onDistanceCalculated }: RouteProps) => {
   const map = useMap();
   const [polyline, setPolyline] = useState<google.maps.Polyline | null>(null);
+  const lastCallTimeRef = useRef<number>(0);
+  const COOLDOWN_MS = 3000; // 1 second cooldown
 
+  const originPos = useMemo(() => 
+    originLat != null && !(originLat === 0 && originLng === 0) ? new google.maps.LatLng(originLat, originLng) : null,
+  [originLat, originLng]
+  );
+  const destinationPos = useMemo(() => 
+    new google.maps.LatLng(destination.lat, destination.lng),
+  [destination.lat, destination.lng]
+  );
+  
   useEffect(() => {
-    if (!map || !origin || !destination) {
+    if (!map || !originPos || !destinationPos) {
       // Cleanup
       polyline?.setMap(null);
       setPolyline(null);
       return;
     }
 
+    const now = Date.now();
+    const timeSinceLastCall = now - lastCallTimeRef.current;
+    
+    if (timeSinceLastCall < COOLDOWN_MS) {
+      return;
+    }
+    
+    lastCallTimeRef.current = now;
+
     const service = new google.maps.DirectionsService();
-    const originPos = new google.maps.LatLng(origin.lat, origin.lng);
-    const destinationPos = new google.maps.LatLng(destination.lat, destination.lng);
 
     service.route(
       {
@@ -60,7 +78,7 @@ const RouteOnMap = ({ origin, destination, onDistanceCalculated }: RouteProps) =
     return () => {
       polyline?.setMap(null);
     };
-  }, [map, origin, destination]);
+  }, [map, originPos, destinationPos, onDistanceCalculated]);
 
   return null;  // Polyline renders via imperative API
 };

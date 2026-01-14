@@ -13,13 +13,13 @@
 .map-container {
   position: fixed;
   top: 30px;
-  left: max(100px, 10%);
+  left: max(100px, 12.5%);
 }
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: max(100px, 10%);
+  width: max(100px, 12.5%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -30,8 +30,8 @@
 .topbar {
   position: fixed;
   top: 0;
-  left: max(100px, 10%);
-  width: calc(100% - max(100px, 10%));
+  left: max(100px, 12.5%);
+  width: calc(100% - max(100px, 12.5%));
   height: 30px;
   background-color: #f3f4f6;
   border-bottom: 2px solid #000000;

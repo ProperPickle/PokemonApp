@@ -6,7 +6,6 @@ import PokemonInfoPopup from './PokemonInfoPopup';
 import PokemonList from './PokemonList';
 import './App.css';
 import Logout from './Logout';
-import TestPokemon from './TestPokemon';
 
 // Describe the shape of each detail item so TS knows name/type exist
 interface Detail {
@@ -26,7 +25,7 @@ const App = () => {
   const [popupIsOpen, setPopupIsOpen] = React.useState(false);
   const [activePokemon, setActivePokemon] = React.useState<Detail | null>(null);
   const [pokemonPopupIsOpen, setPokemonPopupIsOpen] = React.useState(false);
-  const [routeOrigin, setRouteOrigin] = React.useState<LatLng | null>(null);
+  const [routeOrigin, setRouteOrigin] = React.useState<LatLng>({ lat: 0, lng: 0 });
   const [routeDistance, setRouteDistance] = React.useState<number | null>(null);
 
   return (

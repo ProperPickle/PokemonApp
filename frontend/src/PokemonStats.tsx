@@ -17,13 +17,13 @@ export function PokemonStats({ pokemon }: PokemonStatsProps) {
       fetch(pokemon.species.url)
           .then((res) => res.json())
           .then(setSpeciesFromPokemon);
-      }, [pokemon?.name, pokemon?.species.url]);
+      }, [pokemon.species.url]);
 
   useEffect(() => {
       fetch(pokemon.location_area_encounters)
           .then((res) => res.json())
           .then(setLocationsFromPokemon);
-      }, [pokemon?.name, pokemon?.location_area_encounters]);
+      }, [pokemon.location_area_encounters]);
 
   function getFlavorText(species: PokemonSpeciesFromApi): string {
     const entry = species.flavor_text_entries.find(
@@ -35,7 +35,7 @@ export function PokemonStats({ pokemon }: PokemonStatsProps) {
   const flavorText = speciesFromPokemon ? getFlavorText(speciesFromPokemon) : "Loading description...";
 
   function getLocationText(locations: PokemonLocationsFromApi[]): string {
-    if (!locations) return "No location data available";
+    if (!locations || locations.length === 0) return "No location data available";
     const locationNames = locations[0].location_area.name.replace(/-/g, " ");
     return locationNames;
   }

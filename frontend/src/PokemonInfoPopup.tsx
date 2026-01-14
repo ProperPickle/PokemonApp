@@ -1,5 +1,5 @@
 import './Popup.css';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from './Api_Interceptor';
 import {PokemonStats} from "./PokemonStats";
 import { PokemonFromApi } from "./PokemonFromApi";
@@ -24,9 +24,10 @@ const PokemonInfoPopup = ({ pokemon, onNavigate, routeDistance, parentShowDistan
     const [showDistance, setShowDistance] = useState(false);
     const [pokemonFromPage, setPokemonFromPage] = useState<PokemonFromApi | null>(null);
     useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon?.name.toLowerCase()}`)
-        .then((res) => res.json())
-        .then(setPokemonFromPage);
+        if (!pokemon?.name) return;
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name.toLowerCase()}`)
+            .then((res) => res.json())
+            .then(setPokemonFromPage);
     }, [pokemon?.name]);
     useEffect(() => {
         setShowDistance(false);
@@ -43,6 +44,13 @@ const PokemonInfoPopup = ({ pokemon, onNavigate, routeDistance, parentShowDistan
                 }
             }}>How far am I from home?</button>
             <p>{showDistance && routeDistance !== null && routeDistance !== undefined ? `Distance: ${(routeDistance / 1000).toFixed(2)} km` : ""}</p>
+            <button onClick = {(event) => { 
+                event.preventDefault();
+                if(pokemon) {
+                    window.localStorage.setItem('favoritePokemon', pokemon.id.toString());
+                    alert(`${pokemon.name} set as favorite!`);
+                }
+            }}>Set as Favorite</button>
             <button onClick = {(event) => { 
                 event.preventDefault();
                 if(pokemon) {

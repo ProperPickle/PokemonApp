@@ -23,8 +23,8 @@ interface Detail {
 interface MapComponentProps {
   onPokemonClick: (pokemon: Detail) => void;
   onDistanceCalculated?: (distanceKm: number) => void;
-  currPokemon?: Detail | null;
-  routeOrigin: LatLng | null;
+  currPokemon: Detail | null;
+  routeOrigin: LatLng;
 }
 
 const MapComponent = ({onPokemonClick, onDistanceCalculated, currPokemon, routeOrigin}: MapComponentProps) => {
